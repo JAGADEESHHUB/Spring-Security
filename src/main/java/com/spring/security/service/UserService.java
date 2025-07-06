@@ -9,6 +9,8 @@ import com.spring.security.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,6 +21,19 @@ public class UserService {
     public UserResponse createUser(UserRequest userRequest){
         User user = mapper.toEntity(userRequest);
         return mapper.toUserResponseDto(userRepo.save(user));
+    }
+
+    public UserResponse updateUser(UserRequest userRequest, Long id){
+        User existingUser = userRepo.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
+
+        Optional.ofNullable(userRequest.getName()).ifPresent(existingUser::setName);
+        Optional.ofNullable(userRequest.getEmail()).ifPresent(existingUser::setEmail);
+        Optional.ofNullable(userRequest.getPhone()).ifPresent(existingUser::setPhone);
+        Optional.ofNullable(userRequest.getAddress()).ifPresent(existingUser::setAddress);
+        Optional.ofNullable(userRequest.getPin()).ifPresent(existingUser::setPin);
+
+        User user=userRepo.save(existingUser);
+        return mapper.toUserResponseDto(user);
     }
 
 

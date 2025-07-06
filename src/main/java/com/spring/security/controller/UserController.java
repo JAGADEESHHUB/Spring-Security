@@ -5,10 +5,7 @@ import com.spring.security.dto.response.UserResponse;
 import com.spring.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/User")
@@ -21,6 +18,13 @@ public class UserController {
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest){
         return ResponseEntity.ok(userService.createUser(userRequest));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest, @PathVariable Long id){
+        return ResponseEntity.ok(userService.updateUser(userRequest, id));
+    }
+
+
 
 
 }
