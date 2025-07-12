@@ -9,6 +9,7 @@ import com.spring.security.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,21 @@ public class UserService {
 
         User user=userRepo.save(existingUser);
         return mapper.toUserResponseDto(user);
+    }
+
+    public UserResponse getUser(Long id){
+        User user=userRepo.findById(id).orElseThrow(()-> new RuntimeException("User not Found"));
+        return mapper.toUserResponseDto(user);
+    }
+
+    public List<UserResponse> findAllUser(){
+        List<UserResponse> userResponses = userRepo.findAll().stream().map(mapper::toUserResponseDto).toList();
+        return userResponses;
+    }
+
+    public void deleteUser(Long id){
+        User user = userRepo.findById(id).orElseThrow(()-> new RuntimeException("User Not Found"));
+        userRepo.delete(user);
     }
 
 
