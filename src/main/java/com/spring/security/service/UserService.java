@@ -7,6 +7,7 @@ import com.spring.security.entity.User;
 import com.spring.security.mapper.Mapper;
 import com.spring.security.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +19,11 @@ public class UserService {
 
     private final UserRepo userRepo;
     private final Mapper mapper;
+    private final PasswordEncoder  passwordEncoder;
 
     public UserResponse createUser(UserRequest userRequest){
         User user = mapper.toEntity(userRequest);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return mapper.toUserResponseDto(userRepo.save(user));
     }
 

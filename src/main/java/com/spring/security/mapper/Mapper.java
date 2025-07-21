@@ -15,6 +15,8 @@ public class Mapper {
                 .address(userRequest.getAddress())
                 .phone(userRequest.getPhone())
                 .pin(userRequest.getPin())
+                .userName(userRequest.getUserName())
+                .password(userRequest.getPassword())
                 .build();
     }
 

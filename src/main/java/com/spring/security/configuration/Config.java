@@ -23,7 +23,7 @@ public class Config {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST,"/user").authenticated()// here we are telling that no need to restrict the api with /user specifically(POST)
+                        .requestMatchers(HttpMethod.POST,"/user").permitAll()// here we are telling that no need to restrict the api with /user specifically(POST)
                                                                                   // and this need to be said first since we are authenticating all APIs starting /user
                         .requestMatchers("/user/**").authenticated() //telling that to secure all the pages with the API-URLs
                         .requestMatchers("/home").permitAll() //telling that to don't secure all the pages with the API-URLs

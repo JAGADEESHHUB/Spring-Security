@@ -18,4 +18,6 @@ public class User {
     private String phone;
     private String address;
     private Long pin;
+    private String userName;
+    private String password;
 }
