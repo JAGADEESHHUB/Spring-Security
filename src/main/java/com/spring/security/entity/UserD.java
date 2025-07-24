@@ -7,7 +7,7 @@ import lombok.*;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 @Table(name = "User")
 @Builder
-public class User {
+public class UserD {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

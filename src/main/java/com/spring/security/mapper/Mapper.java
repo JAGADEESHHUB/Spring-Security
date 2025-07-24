@@ -2,14 +2,14 @@ package com.spring.security.mapper;
 
 import com.spring.security.dto.request.UserRequest;
 import com.spring.security.dto.response.UserResponse;
-import com.spring.security.entity.User;
+import com.spring.security.entity.UserD;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Mapper {
 
-    public User toEntity(UserRequest userRequest){
-        return User.builder()
+    public UserD toEntity(UserRequest userRequest){
+        return UserD.builder()
                 .name(userRequest.getName())
                 .email(userRequest.getEmail())
                 .address(userRequest.getAddress())
@@ -20,13 +20,13 @@ public class Mapper {
                 .build();
     }
 
-    public UserResponse toUserResponseDto(User user){
+    public UserResponse toUserResponseDto(UserD userD){
         return UserResponse.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .email(user.getEmail())
-                .address(user.getAddress())
-                .phone(user.getPhone())
+                .id(userD.getId())
+                .name(userD.getName())
+                .email(userD.getEmail())
+                .address(userD.getAddress())
+                .phone(userD.getPhone())
                 .build();
     }
 
